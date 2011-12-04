@@ -7,9 +7,16 @@ namespace GiveCRM.DummyDataGenerator.Generation
     {
         private readonly RandomSource random = new RandomSource();
 
+        private readonly IList<StreetPrefixItem> streetPrefixes;
+
         // this is used to check for and avoid generating duplicate values
         // use dictionary not list since contains checking is faster
         private readonly Dictionary<string, bool> generatedPostalAddresses = new Dictionary<string, bool>();
+
+        internal AddressGenerator()
+        {
+            streetPrefixes = FillStreetData();
+        }
 
         internal AddressData GenerateStreetAddress()
         {
@@ -26,20 +33,35 @@ namespace GiveCRM.DummyDataGenerator.Generation
             string postCodePrefix = random.PickFromList(townData.PostalCodePrefixes);
 
             return new AddressData
-                       {
-                                   Address = streetAddress,
-                                   PostalCode = RandomPostalCode(postCodePrefix),
-                                   City = townData.Town,
-                                   Region = townData.Region,
-                                   Country = townData.Country
-                       };
+                {
+                    Address = streetAddress,
+                    PostalCode = RandomPostalCode(postCodePrefix),
+                    City = townData.Town,
+                    Region = townData.Region,
+                    Country = townData.Country
+                };
+        }
+
+        private IList<StreetPrefixItem> FillStreetData()
+        {
+            List<StreetPrefixItem> result = new List<StreetPrefixItem>();
+
+            foreach (var prefix in StreetData.StreetNamePrefixData)
+            {
+                for (int count = 0; count < prefix.Frequency; count++)
+                {
+                    result.Add(prefix);
+                }
+            }
+
+            return result;
         }
 
         private string MakeStreetAddress()
         {
-            string street = string.Format("{0} {1} {2}", random.PickFromList(StreetData.StreetNamePrefix), 
-                                            random.PickFromList(StreetData.StreetNames), 
-                                            random.PickFromList(StreetData.StreetSuffix)).Trim();
+            string street = string.Format("{0} {1} {2}", random.PickFromList(streetPrefixes), 
+                random.PickFromList(StreetData.StreetNames), 
+                random.PickFromList(StreetData.StreetSuffix)).Trim();
             string streetNumber = (random.NextInt(200) + 1).ToString();
 
             if (random.Percent(20))

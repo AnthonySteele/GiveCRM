@@ -54,14 +54,14 @@ namespace GiveCRM.DummyDataGenerator.Generation
                 // don't generate donations each time to simulate a miss
                 if (this.random.Percent(donationRate))
                 {
-                    var amount = GenerateAmount();
-                    var donation = new Donation
-                                       {
-                                            CampaignId = campaign.Id, 
-                                            MemberId = member.Id,
-                                            Amount = amount, 
-                                            Date = random.NextDateTime(),
-                                       };
+                    decimal amount = GenerateAmount();
+                    Donation donation = new Donation
+                            {
+                                CampaignId = campaign.Id, 
+                                MemberId = member.Id,
+                                Amount = amount, 
+                                Date = random.NextDateTime(),
+                            };
                     donationsRepo.Insert(donation);
                 }
             }

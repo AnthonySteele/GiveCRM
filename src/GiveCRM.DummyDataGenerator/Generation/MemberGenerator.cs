@@ -8,7 +8,7 @@ namespace GiveCRM.DummyDataGenerator.Generation
 {
     internal class MemberGenerator : BaseGenerator
     {
-        internal override string GeneratedItemType{get {return "members";}}
+        internal override string GeneratedItemType{get {return "members"; } }
 
         private readonly RandomSource random = new RandomSource();
         private readonly TitleGenerator titleGenerator = new TitleGenerator();
@@ -24,10 +24,10 @@ namespace GiveCRM.DummyDataGenerator.Generation
         {
             Members membersDb = new Members();
             GenerateMultiple(numberToGenerate, () =>
-                                                   {
-                                                       var member = GenerateMember();
-                                                       membersDb.Insert(member);
-                                                   });
+                {
+                    var member = GenerateMember();
+                    membersDb.Insert(member);
+                });
         }
 
         private Member GenerateMember()
@@ -48,12 +48,12 @@ namespace GiveCRM.DummyDataGenerator.Generation
             TitleDataItem titleSalutation = isFemale ? titleGenerator.GenerateFemaleTitle() : titleGenerator.GenerateMaleTitle();
 
             var member = new Member
-                                {
-                                            FirstName = firstName,
-                                            LastName = familyName,
-                                            Title = titleSalutation.Title,
-                                            Salutation = titleSalutation.Salutation,
-                                };
+                {
+                    FirstName = firstName,
+                    LastName = familyName,
+                    Title = titleSalutation.Title,
+                    Salutation = titleSalutation.Salutation,
+                };
 
             member.Reference = this.NextReference(member);
             member.EmailAddress = emailGenerator.GenerateEmailAddress(member.FirstName, member.LastName);
@@ -89,28 +89,28 @@ namespace GiveCRM.DummyDataGenerator.Generation
             if (random.Percent(60))
             {
                 member.PhoneNumbers.Add(new PhoneNumber
-                                            {
-                                                        PhoneNumberType = PhoneNumberType.Home,
-                                                        Number = random.PhoneDigits()
-                                            });
+                    {
+                            PhoneNumberType = PhoneNumberType.Home,
+                            Number = random.PhoneDigits()
+                    });
             }
 
             if (random.Percent(60))
             {
                 member.PhoneNumbers.Add(new PhoneNumber
-                                            {
-                                                        PhoneNumberType = PhoneNumberType.Work,
-                                                        Number = random.PhoneDigits()
-                                            });
+                    {
+                            PhoneNumberType = PhoneNumberType.Work,
+                            Number = random.PhoneDigits()
+                    });
             }
 
             if (random.Percent(60))
             {
                 member.PhoneNumbers.Add(new PhoneNumber
-                                            {
-                                                        PhoneNumberType = PhoneNumberType.Mobile,
-                                                        Number = random.PhoneDigits()
-                                            });
+                    {
+                                PhoneNumberType = PhoneNumberType.Mobile,
+                                Number = random.PhoneDigits()
+                    });
             }
         }
     }

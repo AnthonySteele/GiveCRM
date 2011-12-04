@@ -13,7 +13,12 @@ namespace GiveCRM.DummyDataGenerator.Generation
         internal void GenerateCampaignRun(int campaignId)
         {
             var campaignMembers = this.memberService.SearchByCampaignId(campaignId);
-            var memberCampaignMemberships = campaignMembers.Select(member => new {CampaignId = campaignId, MemberId = member.Id}).ToList();
+            var memberCampaignMemberships = campaignMembers.Select(
+                member => new
+                    {
+                        CampaignId = campaignId, 
+                        MemberId = member.Id
+                    }).ToList();
 
             if (memberCampaignMemberships.Any())
             {

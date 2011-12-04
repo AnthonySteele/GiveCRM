@@ -11,22 +11,22 @@ namespace GiveCRM.DummyDataGenerator.Data
         /// potential accidents where a real email address is accidentally targeted.
         /// </summary>
         internal static readonly IList<string> Domains = new List<string>
-                                                   {
-                                                               "fakemail.com",
-                                                               "fakemail.net",
-                                                               "not.com",
-                                                               "not.net",
-                                                               "notmail.com",
-                                                               "notmail.net",
-                                                               "coldmail.net",
-                                                               "voidmail.net",
-                                                               "voidmail.org",
-                                                               "pmail.com",
-                                                               "pmail.net",
-                                                               "gahoo.com",
-                                                               "gahoo.org",
-                                                               "offthe.net",
-                                                               "notonthe.net",
-                                                   };
+            {
+                "fakemail.com",
+                "fakemail.net",
+                "not.com",
+                "not.net",
+                "notmail.com",
+                "notmail.net",
+                "coldmail.net",
+                "voidmail.net",
+                "voidmail.org",
+                "pmail.com",
+                "pmail.net",
+                "gahoo.com",
+                "gahoo.org",
+                "offthe.net",
+                "notonthe.net",
+            };
     }
 }

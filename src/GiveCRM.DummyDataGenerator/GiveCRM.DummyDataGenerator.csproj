@@ -80,6 +80,7 @@
     <Compile Include="Data\EmailData.cs" />
     <Compile Include="Data\FemaleNames.cs" />
     <Compile Include="Data\MaleNames.cs" />
+    <Compile Include="Data\StreetPrefixItem.cs" />
     <Compile Include="Data\TitleData.cs" />
     <Compile Include="Data\TownData.cs" />
     <Compile Include="Data\TownDataItem.cs" />
