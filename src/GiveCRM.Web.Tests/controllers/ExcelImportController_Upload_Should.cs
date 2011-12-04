@@ -11,14 +11,14 @@ namespace GiveCRM.Admin.Web.Tests
 {
     [TestFixture]
     public class ExcelImportController_Upload_Should
-    {
-        private ExcelImportController controller;
-        
+    {        
         private const string MemberControllerName = "Member";
         private const string IndexActionName = "Index";
 
         private const int ZeroFileLength = 0;
         private const int NonZeroFileLength = 4096;
+
+        private ExcelImportController controller;
 
         [SetUp]
         public void SetUp()

@@ -7,7 +7,7 @@ namespace GiveCRM.BusinessLogic
 {
     public class DonationsService : IDonationsService
     {
-        private readonly IDonationRepository _repository;
+        private readonly IDonationRepository repository;
 
         public DonationsService(IDonationRepository repository)
         {
@@ -16,26 +16,24 @@ namespace GiveCRM.BusinessLogic
                 throw new ArgumentNullException("repository");
             }
 
-            _repository = repository;
+            this.repository = repository;
         }
 
         public IEnumerable<Donation> GetTopDonations(int count)
         {
-            var donations = _repository.GetAll().OrderByDescending(d => d.Amount).Take(count);
+            var donations = repository.GetAll().OrderByDescending(d => d.Amount).Take(count);
             return donations;
         }
 
         public IEnumerable<Donation> GetLatestDonations(int count)
         {
-            var donations = _repository.GetAll().OrderByDescending(d => d.Date).Take(count);
+            var donations = repository.GetAll().OrderByDescending(d => d.Date).Take(count);
             return donations;
         }
 
         public void QuickDonation(Donation donation)
         {
-            _repository.Insert(donation);
+            repository.Insert(donation);
         }
     }
-
-
 }

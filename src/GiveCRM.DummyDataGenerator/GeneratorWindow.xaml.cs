@@ -54,13 +54,17 @@ namespace GiveCRM.DummyDataGenerator
                 .ContinueWith(t =>
                     {
                         DatabaseStatistics dbStats = t.Result;
+                        this.ShowDbStats(dbStats);
                         Log("Database statistics refreshed successfully");
-                        NumberOfMembersLabel.Content = dbStats.NumberOfMembers.ToString();
-                        NumberOfCampaignsLabel.Content = dbStats.NumberOfCampaigns.ToString();
-                        NumberOfSearchFiltersLabel.Content = dbStats.NumberOfSearchFilters.ToString();
-                        NumberOfDonationsLabel.Content = dbStats.NumberOfDonations.ToString();
-                    }, 
-                    uiContext);
+                    }, uiContext);
+        }
+
+        private void ShowDbStats(DatabaseStatistics stats)
+        {
+            this.NumberOfMembersLabel.Content = stats.NumberOfMembers.ToString();
+            this.NumberOfCampaignsLabel.Content = stats.NumberOfCampaigns.ToString();
+            this.NumberOfSearchFiltersLabel.Content = stats.NumberOfSearchFilters.ToString();
+            this.NumberOfDonationsLabel.Content = stats.NumberOfDonations.ToString();
         }
 
         private void GenerateMembersButtonClick(object sender, RoutedEventArgs e)

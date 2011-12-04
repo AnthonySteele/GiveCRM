@@ -46,7 +46,7 @@ namespace GiveCRM.DummyDataGenerator.Generation
             return new Campaign
                 {
                     Name = campaignName,
-                    Description = "A test campaign",
+                    Description = "A test campaign, generated at " + DateTime.Now.ToString(),
                     IsClosed = isClosed  ? "Y" : "N",
                     RunOn = runOn
                 };

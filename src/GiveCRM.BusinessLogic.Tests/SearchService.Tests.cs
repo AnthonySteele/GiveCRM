@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GiveCRM.Models;
@@ -120,8 +119,6 @@ namespace GiveCRM.BusinessLogic.Tests
 
         private class SearchCriteriaComparer : IComparer, IComparer<SearchCriteria>
         {
-            #region Implementation of IComparer<in SearchCriteria>
-
             /// <summary>
             /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
             /// </summary>
@@ -146,10 +143,6 @@ namespace GiveCRM.BusinessLogic.Tests
                 return Comparer<SearchFieldType>.Default.Compare(x.Type, y.Type);
             }
 
-            #endregion
-
-            #region Implementation of IComparer
-
             /// <summary>
             /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
             /// </summary>
@@ -159,23 +152,21 @@ namespace GiveCRM.BusinessLogic.Tests
             /// <param name="x">The first object to compare. </param><param name="y">The second object to compare. </param><exception cref="T:System.ArgumentException">Neither <paramref name="x"/> nor <paramref name="y"/> implements the <see cref="T:System.IComparable"/> interface.-or- <paramref name="x"/> and <paramref name="y"/> are of different types and neither one can handle comparisons with the other. </exception><filterpriority>2</filterpriority>
             public int Compare(object x, object y)
             {
-                var xSearchCriteria = x as SearchCriteria;
-                var ySearchCriteria = y as SearchCriteria;
+                var firstSearchCriteria = x as SearchCriteria;
+                var secondSearchCriteria = y as SearchCriteria;
 
-                if (xSearchCriteria == null && ySearchCriteria != null)
+                if (firstSearchCriteria == null && secondSearchCriteria != null)
                 {
                     return -1;
                 }
 
-                if (xSearchCriteria != null && ySearchCriteria == null)
+                if (firstSearchCriteria != null && secondSearchCriteria == null)
                 {
                     return 1;
                 }
 
-                return Compare(xSearchCriteria, ySearchCriteria);
+                return Compare(firstSearchCriteria, secondSearchCriteria);
             }
-
-            #endregion
         }
     }
 }

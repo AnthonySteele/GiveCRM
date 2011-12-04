@@ -57,9 +57,13 @@ namespace GiveCRM.BusinessLogic
         public void Save(Member member)
         {
             if (member.Id == 0)
+            {
                 this.Insert(member);
+            }
             else
+            {
                 this.Update(member);
+            }
         }
 
         public void Delete(Member member)

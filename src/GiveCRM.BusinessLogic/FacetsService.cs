@@ -6,7 +6,7 @@ namespace GiveCRM.BusinessLogic
 {
     public class FacetsService : IFacetsService
     {
-        private readonly IRepository<Facet> _repository;
+        private readonly IRepository<Facet> repository;
 
         public FacetsService(IRepository<Facet> repository)
         {
@@ -15,29 +15,29 @@ namespace GiveCRM.BusinessLogic
                 throw new ArgumentNullException("repository");
             }
 
-            _repository = repository;
+            this.repository = repository;
         }
 
         public IEnumerable<Facet> All()
         {
-            var facets = _repository.GetAll();
+            var facets = repository.GetAll();
             return facets;
         }
 
         public Facet Get(int id)
         {
-            var facet = _repository.GetById(id);
+            var facet = repository.GetById(id);
             return facet;
         }
 
         public void Insert(Facet facet)
         {
-            _repository.Insert(facet);             
+            repository.Insert(facet);             
         }
 
         public void Update(Facet facet)
         {
-            _repository.Update(facet);
+            repository.Update(facet);
         }
     }
 

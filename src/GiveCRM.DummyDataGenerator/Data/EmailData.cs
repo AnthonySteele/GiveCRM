@@ -4,7 +4,12 @@ namespace GiveCRM.DummyDataGenerator.Data
 {
     internal static class EmailData
     {
-        internal static readonly IList<string> Separators = new List<string> {string.Empty, ".", "_"};
+        internal static readonly IList<string> Separators = new List<string>
+            {
+                string.Empty, 
+                ".", 
+                "_"
+            };
 
         /// <summary>
         /// It's better if these aren't popular email providers to avoid

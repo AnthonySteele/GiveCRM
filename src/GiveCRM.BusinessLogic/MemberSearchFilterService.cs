@@ -5,26 +5,26 @@ namespace GiveCRM.BusinessLogic
 {
     public class MemberSearchFilterService : IMemberSearchFilterService
     {
-        private readonly IMemberSearchFilterRepository _repository;
+        private readonly IMemberSearchFilterRepository repository;
 
         public MemberSearchFilterService(IMemberSearchFilterRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         public IEnumerable<MemberSearchFilter> ForCampaign(int id)
         {
-            return _repository.GetByCampaignId(id);
+            return repository.GetByCampaignId(id);
         }
 
         public void Insert(MemberSearchFilter memberSearchFilter)
         {
-            _repository.Insert(memberSearchFilter);
+            repository.Insert(memberSearchFilter);
         }
 
         public void Delete(int id)
         {
-            _repository.DeleteById(id);
+            repository.DeleteById(id);
         }
 
     }
