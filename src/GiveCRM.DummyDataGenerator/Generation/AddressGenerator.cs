@@ -59,7 +59,10 @@ namespace GiveCRM.DummyDataGenerator.Generation
 
         private string MakeStreetAddress()
         {
-            string street = string.Format("{0} {1} {2}", random.PickFromList(streetPrefixes), 
+            StreetPrefixItem prefixData = random.PickFromList(streetPrefixes);
+
+            string street = string.Format("{0} {1} {2}", 
+                prefixData.Prefix, 
                 random.PickFromList(StreetData.StreetNames), 
                 random.PickFromList(StreetData.StreetSuffix)).Trim();
             string streetNumber = (random.NextInt(200) + 1).ToString();

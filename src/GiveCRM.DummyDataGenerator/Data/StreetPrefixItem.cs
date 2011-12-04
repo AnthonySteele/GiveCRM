@@ -10,5 +10,10 @@
             this.Prefix = prefix;
             this.Frequency = frequency;
         }
+
+        public override string ToString()
+        {
+            return Prefix;
+        }
     }
 }
