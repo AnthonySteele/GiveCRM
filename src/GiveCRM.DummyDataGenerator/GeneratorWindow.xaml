@@ -16,16 +16,32 @@
             <Setter Property="Height" Value="24" />
             <Setter Property="TextAlignment" Value="Right" />         
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+        <Style x:Key="SpacedPanel" TargetType="FrameworkElement">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+        <Style x:Key="WarningText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="4,12,4,12" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="NotificationText" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="ExtraLight" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Margin" Value="0,0,0,8" />
+        </Style>
     </Window.Resources>
-    <DockPanel Margin="5">
+    <DockPanel Margin="2">
         <DockPanel Name="ConnectionDockPanel" DockPanel.Dock="Top">
             <Label DockPanel.Dock="Left" Height="28" Content="Database" />
             <Button DockPanel.Dock="Right" Style="{StaticResource GenerateButton}" Content="Connect" Click="ConnectButtonClick"/>
             <TextBox DockPanel.Dock="Left" Height="23" Margin="5,0,5,0" Name="DatbaseConnectionStringTextBox" IsReadOnly="True" />
         </DockPanel>
-
-        <TextBlock DockPanel.Dock="Top" Margin="65,0,0,2" Text="Change this connection string by editing app.config" FontStyle="Italic" FontWeight="ExtraLight"/>
-
+        <TextBlock DockPanel.Dock="Top" Style="{StaticResource NotificationText}" Text="Change this connection string by editing app.config" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -33,18 +49,17 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
             
-            <TabControl Grid.Row="0" Name="TabControl" Margin="0,5,0,0" IsEnabled="False">
+            <TabControl Grid.Row="0" Name="TabControl" IsEnabled="False">
                 <TabItem Header="Just Do It">
-                    <DockPanel Margin="5">
+                    <DockPanel Style="{StaticResource SpacedPanel}" LastChildFill="False">
                         <TextBlock DockPanel.Dock="Top" Text="Use this pane to generate random data from an empty database." />
-                        <TextBlock DockPanel.Dock="Top" Margin="0,15,0,0" Text="WARNING: the entire contents of the database will be replaced." FontWeight="Bold" />
-
-                        <Button Width="150" Height="40" Content="Generate Database" Name="GenerateDatabaseButton" Click="GenerateAllButtonClick" />
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource WarningText}" Text="WARNING: the entire contents of the database will be replaced." />
+                        <Button DockPanel.Dock="Top" Width="150" Height="40" Content="Generate Database" Name="GenerateDatabaseButton" Click="GenerateAllButtonClick" />
                     </DockPanel>
                 </TabItem>
                 
                 <TabItem Header="Stats">
-                    <DockPanel LastChildFill="False">
+                    <DockPanel Style="{StaticResource SpacedPanel}" LastChildFill="False">
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Style="{StaticResource GenerateButton}" Content="Refresh" Click="RefreshButtonClick"/>
                         </StackPanel>
@@ -72,7 +87,7 @@
                 </TabItem>
                 
                 <TabItem Header="Members">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SpacedPanel}" >
                         <DockPanel LastChildFill="False">
                             <Label DockPanel.Dock="Left" Content="Number of Members" />
                             <TextBox DockPanel.Dock="Left" Style="{StaticResource EnterAmount}" VerticalAlignment="Bottom" Name="NumberOfMembersTextBox" Text="10000" />
@@ -82,7 +97,7 @@
                 </TabItem>
                 
                 <TabItem Header="Campaigns">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SpacedPanel}">
                         <DockPanel LastChildFill="False">
                             <Label DockPanel.Dock="Left" Content="Number of Campaigns" />
                             <TextBox DockPanel.Dock="Left" Style="{StaticResource EnterAmount}" VerticalAlignment="Bottom" Name="NumberOfCampaignsTextBox" Text="100" />
