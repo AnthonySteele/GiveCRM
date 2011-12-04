@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = Model.Title;
-    string formWidthClass = "span4";
+    const string FormWidthClass = "span4";
 }
 
 <div class="campaign">
@@ -24,19 +24,17 @@
             <fieldset>
                 @Html.HiddenFor(m => m.Campaign.Id)
 
-                <div class="clearfix">
-                    @Html.LabelFor(m => m.Campaign.Name)
-                    <div class="input">
-                        @Html.TextBoxFor(m => m.Campaign.Name, new { @class = formWidthClass })
-                    </div>
-                </div>
-
-                <div class="clearfix">
-                    @Html.LabelFor(m => m.Campaign.Description)
-                    <div class="input">
-                        @Html.TextAreaFor(m => m.Campaign.Description, 5, 80, new { @class = formWidthClass })
-                    </div>
-                </div>
+                @if (Model.IsReadonly)
+                {
+                    @EditHelper.LabeledValue(Html, "Name", Model.Campaign.Name)
+                    @EditHelper.LabeledValue(Html, "Description", Model.Campaign.Description)
+                    <div>This campaign is not editable</div>
+                }
+                else
+                {
+                    @EditHelper.Field(Html, m => m.Campaign.Name)
+                    @EditHelper.TextAreaFor(Html, m => m.Campaign.Description, 5, 80, new { @class = FormWidthClass })
+                }
             </fieldset>
                 
             <h2>Recipient Listing</h2>
@@ -44,50 +42,56 @@
             @* TODO(BS) Build logic to create recipient list generation *@
             <h3>Search Filters</h3>				
             <ul>
-                @if (Model.SearchFilters.Any() == false) {
+                @if (!Model.SearchFilters.Any())
+                {
                     @Model.NoSearchFiltersText;
                 }
-                else {
-                    foreach (MemberSearchFilterViewModel filterViewModel in Model.SearchFilters) {
+                else
+                {
+                    foreach (MemberSearchFilterViewModel filterViewModel in Model.SearchFilters)
+                    {
                         <li>
                             @filterViewModel.CriteriaDisplayText
-                            @if(Model.IsReadonly == false) {
-                                @Html.ActionLink("[x]", "DeleteMemberSearchFilter", new {
-                                    campaignId = filterViewModel.CampaignId,
-                                    memberSearchFilterId = filterViewModel.MemberSearchFilterId
-                                })
+                            @if (!Model.IsReadonly)
+                            {
+                                @Html.ActionLink("[x]", "DeleteMemberSearchFilter", new
+                           {
+                               campaignId = filterViewModel.CampaignId,
+                               memberSearchFilterId = filterViewModel.MemberSearchFilterId
+                           })
                             }
                         </li>
                     }
                 }
 
-                @if (Model.Campaign.Id > 0 && Model.IsReadonly == false) {
+                @if (Model.Campaign.Id > 0 && (!Model.IsReadonly))
+                {
                     <li>@Html.ActionLink("Add new search filter", "AddMembershipSearchFilter", new { campaignId = Model.Campaign.Id })</li>
                 }
             </ul>
 
             <h3>Matched Recipient Listing</h3>
     
-                         if (Model.ApplicableMembers.Count() == 0)
-                         {
+                if (Model.ApplicableMembers.Count() == 0)
+                {
                              @Model.NoMatchingMembersText
-                         }
-                         else
-                         {
+                }
+                else
+                {
                              <ul>
                                  @foreach (Member member in Model.ApplicableMembers)
                                  {
                                      <li>@member.Salutation @member.FirstName @member.LastName</li>
                                  }
                              </ul>
-                         }
-                         
-                        if (Model.IsReadonly == false)
-                        {
+                }
+
+                if (!Model.IsReadonly)
+                {
                             <div class="actions clearfix">
-                            <input type="submit" value="Save Campaign" class="btn primary @formWidthClass" />
+                            <input type="submit" value="Save Campaign" class="btn primary @FormWidthClass" />
                             </div>
-                        }
+                }
         }
         </div>
     
@@ -98,7 +102,7 @@
                             @if (Model.Campaign.Id > 0)
                             {
 
-                                if (Model.Campaign.IsCommitted == true && Model.Campaign.IsClosed == "N")
+                                if (Model.Campaign.IsCommitted && Model.Campaign.IsClosed == "N")
                                 {
                                     <li>@Html.ActionLink("Close campaign", "CloseCampaign", new { campaignId = Model.Campaign.Id })</li>                                
                                 }

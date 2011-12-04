@@ -16,7 +16,11 @@
 }
 
 .editor-label > label {
-  margin-right: 2px;
+  margin-right: 4px;
+}
+
+.text-label {
+  font-weight: bold;
 }
 
 .editor-field {

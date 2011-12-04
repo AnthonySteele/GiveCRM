@@ -98,6 +98,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(MemberEditViewModel member)
         {
             ViewBag.Title = member.Id == 0 ? "Add Member" : "Edit Member";

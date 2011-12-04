@@ -8,6 +8,7 @@
 <div>
 @{Html.BeginForm("Save", "Member", FormMethod.Post, new { id = "addMember" });}
 
+@Html.AntiForgeryToken()
 @Html.HiddenFor(m => m.Id)
 
 @EditHelper.FieldWithValidation(Html, m => m.Reference)

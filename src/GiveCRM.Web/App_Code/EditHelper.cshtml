@@ -6,10 +6,16 @@
 
 @functions
 {
+    public static HelperResult LabeledValue<TModel>(HtmlHelper<TModel> htmlHelper, string label, string value)
+    {
+        return ReadOnlyFieldFormat(label, value);
+    }
+
     public static HelperResult Field<TModel, TProperty>(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expr)
     {
         return FieldFormat(htmlHelper.LabelFor(expr), htmlHelper.EditorFor(expr), null);
     }
+
 
     public static HelperResult FieldWithValidation<TModel, TProperty>(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expr)
     {
@@ -23,6 +29,17 @@
     {
         return FieldFormat(htmlHelper.LabelFor(expr), htmlHelper.DropDownListFor(expr, items), null);
     }
+
+    public static HelperResult TextAreaFor<TModel, TProperty>(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expr)
+    {
+        return FieldFormat(htmlHelper.LabelFor(expr), htmlHelper.TextAreaFor(expr), null);
+    }
+
+    public static HelperResult TextAreaFor<TModel, TProperty>(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expr,
+        int rows, int columns, object htmlAttributes)
+    {
+        return FieldFormat(htmlHelper.LabelFor(expr), htmlHelper.TextAreaFor(expr, rows, columns, htmlAttributes), null);
+    }
 }
 
 @helper FieldFormat(MvcHtmlString labelData, MvcHtmlString fieldData, MvcHtmlString validationMessage)
@@ -33,4 +50,12 @@
     {
             @validationMessage
     }
+}
+
+@helper ReadOnlyFieldFormat(string labelData, string fieldData)
+{
+    <div>
+        <span class="text-label">@(labelData + ":")</span>
+        <span>@fieldData</span>
+    </div>
 }
